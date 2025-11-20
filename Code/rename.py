@@ -1,5 +1,9 @@
 import os
 
+'''
+This script was used to create the dataset. It renames files.
+'''
+
 folder = "cells"  # folder containing your images
 
 for filename in os.listdir(folder):

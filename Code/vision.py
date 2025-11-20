@@ -192,4 +192,4 @@ if __name__ == "__main__":
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
-    save_cells(img, grid, int(cell_size), output_folder="a_dataset/fruit2", particular=cellList)
+    #save_cells(img, grid, int(cell_size), output_folder="cells/fruit2", particular=cellList)

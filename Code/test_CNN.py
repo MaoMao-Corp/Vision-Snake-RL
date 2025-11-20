@@ -10,7 +10,11 @@ from PIL import Image
 import torch.nn.functional as F
 import time
 import torch
-from thop import profile  # For FLOPs calculation
+from thop import profile
+
+'''
+This is a script used to test the CNN on individual images
+'''
 
 ###########################################
 # Speed
