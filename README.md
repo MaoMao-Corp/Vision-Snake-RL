@@ -54,14 +54,7 @@ Progressive training approach:
 - Transfer learning between board sizes
 - Adaptive learning rates based on complexity
 
-### Reward Engineering
-- Sparse rewards for fruit consumption
-- Dense rewards for distance improvement
-- Penalties for collisions and inefficiency
-- Survival bonuses for prolonged gameplay
-
 ## Performance Features
 - Board-size agnostic architecture
 - Real-time inference capability
 - Robust to visual noise and variations
-- Transfer learning across different game configurations
