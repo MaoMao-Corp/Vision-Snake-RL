@@ -43,9 +43,7 @@ The screen capture part of the system extracts important visual features such as
 - **Value Head**: Separate network for state value estimation
 
 ### Training Algorithm
-- **Algorithm**: Proximal Policy Optimization (PPO)
-- **Policy Type**: CNN-based policy network
-- **Key Features**: Adaptive learning rates and exploration incentives
+- **Algorithm**: DQN
 
 ## Training Methodology
 
