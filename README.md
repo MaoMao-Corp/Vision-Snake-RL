@@ -13,6 +13,8 @@ The objective of the project was to make an agent agnostic to browser, resolutio
 - [Preprocessing](#preprocessing)
 - [Hough Line Detection](#hough-line-detection)
 - [Grid Detection and Cell Saving](#grid-detection-and-cell-saving)
+- [Reinforcement Learning Architecture](#reinforcement-learning-architecture)
+- [Training Methodology](#training-methodology)
 - [Run the Script](#run-the-script)
 
 ## Tech Stack
@@ -27,9 +29,41 @@ The objective of the project was to make an agent agnostic to browser, resolutio
 
 The screen capture part of the system extracts important visual features such as grid lines, grid cells, and game states using OpenCV and other image processing techniques. After that, it runs a MobileNet Convolutional Neural Network (CNN) to output cell probabilities and feed that to a RL algorithm. Finally, the policy is trained using Proximal Policy Optimization (PPO) from stable-baseline3 on a custom built environment.
 
-## Setup Instructions
+## Reinforcement Learning Architecture
 
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/your-username/rl-snake-player.git
-   cd rl-snake-player
+### Custom Environment
+- **Observation Space**: Probabilistic matrix representing game state
+- **Action Space**: Discrete actions for snake movement
+- **State Representation**: Robust probabilistic grid with noise injection
+- **Reward System**: Distance-based rewards using Manhattan distance
+
+### Neural Network Architecture
+- **Feature Extractor**: CNN with adaptive pooling for any board size
+- **Policy Head**: Fully connected layers for action selection
+- **Value Head**: Separate network for state value estimation
+
+### Training Algorithm
+- **Algorithm**: Proximal Policy Optimization (PPO)
+- **Policy Type**: CNN-based policy network
+- **Key Features**: Adaptive learning rates and exploration incentives
+
+## Training Methodology
+
+### Curriculum Learning
+Progressive training approach:
+- Start with small boards to learn basic mechanics
+- Gradually increase board size as agent improves
+- Transfer learning between board sizes
+- Adaptive learning rates based on complexity
+
+### Reward Engineering
+- Sparse rewards for fruit consumption
+- Dense rewards for distance improvement
+- Penalties for collisions and inefficiency
+- Survival bonuses for prolonged gameplay
+
+## Performance Features
+- Board-size agnostic architecture
+- Real-time inference capability
+- Robust to visual noise and variations
+- Transfer learning across different game configurations
