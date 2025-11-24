@@ -18,8 +18,8 @@ pyautogui.FAILSAFE = False
 
 # -------------------------
 # Load trained model
-# -------------------------
 def load_pretrained_agent():
+# -------------------------
     print("[INFO] Loading trained RL model:", MODEL_PATH)
 
     # Must match input size of the model you trained
@@ -94,8 +94,10 @@ def run_agent():
         # Fill in direction for state extractor
         board["direction"] = direction
 
-        # Convert board to RL state vector
+        print(direction)
+
         state = get_state_from_board(board)
+        # Convert board to RL state vector
 
         # Model chooses action
         action = select_action(model, state)

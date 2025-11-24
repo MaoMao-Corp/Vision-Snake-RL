@@ -123,7 +123,7 @@ def head_candidate_score(i, j, prob_matrix):
     score /= (neighbors + 1e-6)
     return score
 
-
+from state_corrector import SnakeStateCorrector
 
 # ============================================================
 #   FRAME → BOARD DICT GENERATOR
@@ -144,6 +144,8 @@ def board_stream(visualize=True):
 
     grid = initialize_grid()
     rows, cols, _ = grid.shape
+
+    snake_corrector = SnakeStateCorrector(rows, cols)
 
     # probability matrix
     prob_matrix = np.zeros((rows, cols, len(CLASS_NAMES)))
@@ -231,6 +233,8 @@ def board_stream(visualize=True):
             "direction": None,  # fill externally
         }
 
+        corrected_board = snake_corrector.correct_board_state(board_dict)
+
         # VISUALIZATION
         if visualize:
             disp = frame.copy()
@@ -249,10 +253,52 @@ def board_stream(visualize=True):
                     color = CLASS_COLORS[cname]
                     cv2.rectangle(disp, (x1, y1), (x2, y2), color, 2)
 
+            direction = None
+
+            # Draw direction arrow on snake head
+            if board_dict["head"] is not None and direction is not None:
+                head_i, head_j = board_dict["head"]
+                y, x = grid[head_i, head_j]
+                
+                # Center of the head cell
+                center_x = x
+                center_y = y
+                
+                # Arrow parameters
+                arrow_length = cs // 2
+                
+                # Calculate arrow end point based on direction
+                if direction == "UP":
+                    end_x = center_x
+                    end_y = center_y - arrow_length
+                elif direction == "DOWN":
+                    end_x = center_x
+                    end_y = center_y + arrow_length
+                elif direction == "LEFT":
+                    end_x = center_x - arrow_length
+                    end_y = center_y
+                elif direction == "RIGHT":
+                    end_x = center_x + arrow_length
+                    end_y = center_y
+                else:
+                    end_x = center_x
+                    end_y = center_y
+                
+                # Draw arrow (thicker and more visible)
+                cv2.arrowedLine(disp, 
+                                (center_x, center_y), 
+                                (end_x, end_y), 
+                                color=(255, 255, 0),  # Bright yellow
+                                thickness=3,
+                                tipLength=0.3)
+                
+                # Optional: Add a small circle at head center for better visibility
+                cv2.circle(disp, (center_x, center_y), 4, (255, 255, 255), -1)  # White dot
+
             cv2.imshow("Board Extractor", disp)
             if cv2.waitKey(1) == 27:
                 break
 
-        yield board_dict
+        yield corrected_board
 
     cv2.destroyAllWindows()
