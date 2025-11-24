@@ -29,6 +29,10 @@ The objective of the project was to make an agent agnostic to browser, resolutio
 
 The screen capture part of the system extracts important visual features such as grid lines, grid cells, and game states using OpenCV and other image processing techniques. After that, it runs a MobileNet Convolutional Neural Network (CNN) to output cell probabilities and feed that to a RL algorithm. Finally, the policy is trained using Proximal Policy Optimization (PPO) from stable-baseline3 on a custom built environment.
 
+## Computer Vision Architecture
+
+![snakegif](https://github.com/user-attachments/assets/9d1d269a-3581-4601-a7d7-8eb033c0123c)
+
 ## Reinforcement Learning Architecture
 
 ### Custom Environment
@@ -43,9 +47,7 @@ The screen capture part of the system extracts important visual features such as
 - **Value Head**: Separate network for state value estimation
 
 ### Training Algorithm
-- **Algorithm**: Proximal Policy Optimization (PPO)
-- **Policy Type**: CNN-based policy network
-- **Key Features**: Adaptive learning rates and exploration incentives
+- **Algorithm**: DQN
 
 ## Training Methodology
 
@@ -56,14 +58,7 @@ Progressive training approach:
 - Transfer learning between board sizes
 - Adaptive learning rates based on complexity
 
-### Reward Engineering
-- Sparse rewards for fruit consumption
-- Dense rewards for distance improvement
-- Penalties for collisions and inefficiency
-- Survival bonuses for prolonged gameplay
-
 ## Performance Features
 - Board-size agnostic architecture
 - Real-time inference capability
 - Robust to visual noise and variations
-- Transfer learning across different game configurations
