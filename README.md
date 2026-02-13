@@ -1,4 +1,4 @@
-# Screen Capture RL Snake Player (Work in progress)
+# Screen Capture RL Snake Player (DEPRECATED)
 
 This project uses computer vision techniques to capture and process the game screen of a Snake game, making it possible to apply reinforcement learning (RL) to control the snake autonomously.
 
@@ -98,7 +98,7 @@ On a simulated environment with perfect information, the model learns pretty goo
 
 ---
 
-# Putting it together (work in progress)
+# Putting it together
 
 CNN Outputs probabilistic board matrix, then **State Corrector** applies game logic:
 
@@ -111,6 +111,6 @@ Corrects CNN misclassifications using:
 
 # Results
 
-For now, each of the components work almost flawlessly in isolation, but the combined result looks like the following. This is a work in progress so it is expected to be fixed.
+For now, each of the components work almost flawlessly in isolation, but the combined result looks like the following.
 
 <img src="plots/snakegif2.gif" width="45%" />
